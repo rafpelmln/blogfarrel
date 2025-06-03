@@ -6,7 +6,18 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css " />
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        /* Hilangkan scrollbar vertikal di semua browser */
+        .no-scrollbar {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE 10+ */
+        }
 
+        .no-scrollbar::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+        }
+
+    </style>
 </head>
 <body class="h-screen bg-[#F8F3D9]">
 
@@ -19,7 +30,7 @@
         @include('admin.layouts.sidebar')
 
         <!-- Main Content -->
-        <main class="flex-1 p-6 overflow-auto ml-14 mr-30 mt-14">
+        <main class="flex-1 p-6 overflow-auto ml-14 mr-30">
             @yield('content')
         </main>
 

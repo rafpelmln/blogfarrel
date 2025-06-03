@@ -18,7 +18,7 @@ class ArtikelController extends Controller
             $query->where('kategori_id', $request->kategori);
         }
 
-        $artikels = $query->paginate(12);
+        $artikels = $query->paginate(9);
 
         $kategoriList = Kategori::all();
 
