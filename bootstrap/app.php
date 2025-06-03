@@ -12,10 +12,14 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function ($middleware) {
-        $middleware->register('admin', AdminMiddleware::class);
-        $middleware->register('guest.redirect', RedirectIfAuthenticated::class);
+    ->withMiddleware(function (Middleware $middleware) {
+        // Daftarkan alias middleware, bukan append (global)
+        $middleware->alias([
+            'admin' => AdminMiddleware::class,
+            'guest.redirect' => RedirectIfAuthenticated::class,
+        ]);
     })
-    ->withExceptions(function ($exceptions) {
+    ->withExceptions(function (Exceptions $exceptions) {
         //
-    })->create();
+    })
+    ->create();

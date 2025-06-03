@@ -10,11 +10,21 @@ use Illuminate\Support\Facades\Auth;
 
 class ArtikelController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $artikels = Artikel::with('kategori')->latest()->get();
-        return view('admin.artikel.index', compact('artikels'));
+        $query = Artikel::with('kategori')->latest();
+
+        if ($request->has('kategori') && $request->kategori != '') {
+            $query->where('kategori_id', $request->kategori);
+        }
+
+        $artikels = $query->paginate(12);
+
+        $kategoriList = Kategori::all();
+
+        return view('admin.artikel.index', compact('artikels', 'kategoriList'));
     }
+
 
     public function create()
     {

@@ -13,10 +13,9 @@ Route::get('/', function () {
 });
 
 // Halaman login dan register (pakai middleware redirect if authenticated)
-Route::middleware('redirect.if.authenticated')->group(function () {
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
+Route::middleware('guest.redirect')->group(function () {
+    Route::get('/autentikasi', [AuthController::class, 'showLoginRegisForm'])->name('login.form');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
-    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
 });
 

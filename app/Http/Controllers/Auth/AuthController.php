@@ -10,10 +10,10 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    // Tampilkan form login
-    public function showLoginForm()
+    // Tampilkan form login & register
+    public function showLoginRegisForm()
     {
-        return view('auth.login');
+        return view('auth.aut'); // Sudah mencakup login dan register dalam 1 halaman
     }
 
     // Proses login
@@ -40,12 +40,6 @@ class AuthController extends Controller
         ]);
     }
 
-    // Tampilkan form register
-    public function showRegisterForm()
-    {
-        return view('auth.register');
-    }
-
     // Proses register
     public function register(Request $request)
     {
@@ -55,30 +49,26 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:8'],
         ]);
 
+        // Default role diset ke 'user' biar aman
         $user = User::create([
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'user', // <--- pastikan ini diset secara default
         ]);
 
         Auth::login($user);
 
         // Redirect setelah register
-        if ($user->role === 'admin') {
-            return redirect('/admin/dashboard');
-        } else {
-            return redirect('/user/dashboard');
-        }
+        return redirect('/user/dashboard');
     }
 
     // Logout
     public function logout(Request $request)
     {
         Auth::logout();
-
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
         return redirect('/');
     }
 }
