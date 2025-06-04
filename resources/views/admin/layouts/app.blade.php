@@ -24,13 +24,13 @@
     <!-- Topbar -->
     @include('admin.layouts.topbar')
 
-    <div class="flex h-[calc(100vh-64px)]">
+    <div class="flex min-h-screen">
 
         <!-- Sidebar -->
         @include('admin.layouts.sidebar')
 
         <!-- Main Content -->
-        <main class="flex-1 p-6 overflow-auto ml-14 mr-30">
+        <main class="flex-1 p-6 ml-14 mr-30">
             @yield('content')
         </main>
 

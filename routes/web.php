@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\ArtikelController as AdminArtikelController;
 use App\Http\Controllers\admin\KategoriController as AdminKategoriController;
+use App\Http\Controllers\admin\KomentarController as AdminKomentarController;
 use App\Http\Controllers\user\ArtikelController as UserArtikelController;
 use App\Http\Controllers\user\KomentarController as UserKomentarController;
 use App\Http\Controllers\Auth\AuthController;
@@ -45,12 +46,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [AdminArtikelController::class, 'index'])->name('index');
         Route::get('/create', [AdminArtikelController::class, 'create'])->name('create');
         Route::post('/', [AdminArtikelController::class, 'store'])->name('store');
+        Route::get('/{artikel}', [AdminArtikelController::class, 'show'])->name('show'); // <--- tambahkan ini
         Route::get('/{artikel}/edit', [AdminArtikelController::class, 'edit'])->name('edit');
         Route::put('/{artikel}', [AdminArtikelController::class, 'update'])->name('update');
         Route::delete('/{artikel}', [AdminArtikelController::class, 'destroy'])->name('destroy');
+
+        // Komentar pada artikel (oleh admin)
+        Route::post('/{artikel}/komentar', [AdminKomentarController::class, 'store'])->name('komentar.store');
+        // Hapus Komentar (Admin)
+        Route::delete('/komentar/{komentar}', [AdminKomentarController::class, 'destroy'])->name('komentar.destroy');
     });
-
-
 
 
     // [----- ROUTING USER -----]
@@ -63,7 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/artikel', [UserArtikelController::class, 'index'])->name('artikel.index');
         Route::get('/artikel/{artikel}', [UserArtikelController::class, 'show'])->name('artikel.show');
 
-        // Komentar 
+        // Komentar oleh user
         Route::post('/artikel/{artikel}/komentar', [UserKomentarController::class, 'store'])->name('komentar.store');
         Route::delete('/komentar/{komentar}', [UserKomentarController::class, 'destroy'])->name('komentar.destroy');
     });

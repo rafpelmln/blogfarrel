@@ -46,7 +46,7 @@
                     <p class="text-[#55513f] mb-4 line-clamp-3">
                         {{ Str::limit(strip_tags($artikel->isi), 100) }}
                     </p>
-                    <a href="#" class="text-[#464131] hover:underline font-medium inline-block mt-2">
+                    <a href="{{ route('admin.artikel.show',  $artikel) }}" class="text-[#464131] hover:underline font-medium inline-block mt-2">
                         Lihat Selengkapnya →
                     </a>
                 </div>
@@ -69,30 +69,3 @@
     </div>
 </div>
 @endsection
-
-{{-- @extends('admin.layouts.app')
-
-@section('page-title', 'Artikel')
-@section('title', 'Blog Farrel | Artikel')
-@section('content')
-<div class="flex flex-col gap-6 p-6">
-    <h1 class="text-3xl font-medium text-center text-[#504B38]">Artikel</h1>
-
-    <!-- Grid Artikel -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        @foreach ($artikels as $artikel)
-            <div class="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-white">
-                <div class="p-6">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ $artikel->judul }}</h2>
-                    <p class="text-gray-600 mb-4 line-clamp-3">
-                        {{ strip_tags($artikel->isi) }}
-                    </p>
-                    <a href="{{ route('admin.artikel.show', $artikel->id) }}" class="text-blue-600 hover:underline font-medium inline-block mt-2">
-                        Lihat Selengkapnya →
-                    </a>
-                </div>
-            </div>
-        @endforeach
-    </div>
-</div>
-@endsection --}}

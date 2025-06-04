@@ -17,4 +17,16 @@ class Artikel extends Model
     {
         return $this->belongsTo(Kategori::class);
     }
+
+    // Relasi ke User
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // 🔥 Tambahkan relasi ke komentar
+    public function komentars()
+    {
+        return $this->hasMany(Komentar::class);
+    }
 }

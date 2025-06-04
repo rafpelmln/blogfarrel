@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Komentar;
+use App\Models\Artikel ;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,21 +22,24 @@ class KomentarController extends Controller
     /**
      * Simpan komentar baru oleh admin
      */
-    public function store(Request $request)
+    public function store(Request $request, $artikelId)
     {
         $request->validate([
-            'artikel_id' => 'required|exists:artikels,id',
             'isi' => 'required|string',
         ]);
 
+        $artikel = Artikel::findOrFail($artikelId);
+
         Komentar::create([
-            'artikel_id' => $request->artikel_id,
-            'user_id' => Auth::id(),
+            'artikel_id' => $artikelId,
+            'user_id' => Auth::id(), // pastikan admin juga terautentikasi
             'isi' => $request->isi,
+            'kategori_id' => $artikel->kategori_id, // otomatis ambil dari artikel
         ]);
 
-        return redirect()->back()->with('success', 'Komentar berhasil ditambahkan.');
+        return back()->with('success', 'komentar udah ditambah Nih!');
     }
+
 
     /**
      * Hapus komentar
@@ -42,6 +47,7 @@ class KomentarController extends Controller
     public function destroy(Komentar $komentar)
     {
         $komentar->delete();
-        return redirect()->back()->with('success', 'Komentar berhasil dihapus.');
+
+        return back()->with('success', 'Yeay, Komentar Udah Dihapus!');
     }
 }

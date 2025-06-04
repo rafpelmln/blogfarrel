@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Komentar extends Model
 {
-    protected $filable = 
+    protected $fillable = 
     [
         'isi',
         'user_id',
-        'artikel_id'
+        'artikel_id',
+        'kategori_id'
     ];
 
     public function artikel () 

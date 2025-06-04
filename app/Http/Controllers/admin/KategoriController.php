@@ -29,7 +29,7 @@ class KategoriController extends Controller
             'nama_kategori' => $request->nama_kategori,
         ]);
 
-        return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil ditambahkan.');
+        return redirect()->route('admin.kategori.index')->with('success', 'kategori udah ditambah nih!');
     }
 
     public function edit($id)
@@ -50,7 +50,7 @@ class KategoriController extends Controller
             'nama_kategori' => $request->nama_kategori,
         ]);
 
-        return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil diperbarui.');
+        return redirect()->route('admin.kategori.index')->with('success', 'kategori udah diupdate nih');
     }
 
     public function destroy($id)
@@ -58,6 +58,6 @@ class KategoriController extends Controller
         $kategori = Kategori::findOrFail($id);
         $kategori->delete();
 
-        return redirect()->route('admin.kategori.index')->with('success', 'Kategori berhasil dihapus.');
+        return redirect()->route('admin.kategori.index')->with('success', 'kategori udah dihapus nih!');
     }
 }

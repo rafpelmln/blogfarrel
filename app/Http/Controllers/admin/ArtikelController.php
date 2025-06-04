@@ -12,7 +12,7 @@ class ArtikelController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Artikel::with('kategori')->latest();
+        $query = Artikel::with('kategori');
 
         if ($request->has('kategori') && $request->kategori != '') {
             $query->where('kategori_id', $request->kategori);
@@ -47,13 +47,15 @@ class ArtikelController extends Controller
             'user_id' => Auth::id(), // Jika artikel dikaitkan ke pembuat
         ]);
 
-        return redirect()->route('admin.artikel.index')->with('success', 'Artikel berhasil ditambahkan.');
+        return redirect()->route('admin.artikel.index')->with('success', 'keren... artikel udah ditambah nih!');
     }
 
     public function show(Artikel $artikel)
     {
+        $artikel->load(['komentars.user']); // relasi komentar dan user-nya
         return view('admin.artikel.show', compact('artikel'));
     }
+
 
     public function edit(Artikel $artikel)
     {
@@ -75,12 +77,12 @@ class ArtikelController extends Controller
             'kategori_id' => $request->kategori_id,
         ]);
 
-        return redirect()->route('admin.artikel.index')->with('success', 'Artikel berhasil diperbarui.');
+        return redirect()->route('admin.artikel.index')->with('success', 'artikel udah diedit nih');
     }
 
     public function destroy(Artikel $artikel)
     {
         $artikel->delete();
-        return redirect()->route('admin.artikel.index')->with('success', 'Artikel berhasil dihapus.');
+        return redirect()->route('admin.artikel.index')->with('success', 'artikelnya udah dihapus nih');
     }
 }
