@@ -24,7 +24,7 @@
             @forelse ($artikel->komentars as $komentar)
                 <div class="mb-4 p-5  bg-[#B9B28A] rounded-xl shadow-md">
                     <div class="flex justify-between items-center mb-1" x-data="{ open: false }">
-                        <strong class="text-[#504B38]">{{ $komentar->user->name ?? 'Admin' }}</strong>
+                        <strong class="text-[#504B38]">{{ $komentar->user->username ?? 'Seseorang' }}</strong>
     
                         <!-- Tombol titik tiga -->
                         <div class="relative">
@@ -52,7 +52,7 @@
                     <p class="text-[#55513f]">{{ $komentar->isi }}</p>
                     <p class="text-[#55513f] pt-3 text-end text-sm italic">
                             Dibuat: {{ $komentar->created_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i') }} <br>
-                        </p>
+                    </p>
                 </div>
             @empty
                 <p class="text-gray-600 italic">Belum ada komentar.</p>

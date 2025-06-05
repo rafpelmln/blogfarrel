@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\ArtikelController as AdminArtikelController;
 use App\Http\Controllers\admin\KategoriController as AdminKategoriController;
 use App\Http\Controllers\admin\KomentarController as AdminKomentarController;
+use App\Http\Controllers\admin\UserController as AdminUserController;
+
 use App\Http\Controllers\user\ArtikelController as UserArtikelController;
 use App\Http\Controllers\user\KomentarController as UserKomentarController;
 use App\Http\Controllers\Auth\AuthController;
@@ -57,6 +59,38 @@ Route::middleware('auth')->group(function () {
         Route::delete('/komentar/{komentar}', [AdminKomentarController::class, 'destroy'])->name('komentar.destroy');
     });
 
+    //  [----- ROUTING KOMENTAR -----]
+    Route::middleware('admin')->prefix('admin/komentar')->name('admin.komentar.')->group(function () {
+        Route::get('/', [AdminKomentarController::class, 'index'])->name('index');
+    });
+
+    //  [----- ROUTING USER -----]
+    Route::middleware('admin')->prefix('admin/user')->name('admin.user.')->group(function () {
+        Route::get('/', [AdminUserController::class, 'index'])->name('index');
+        Route::put('/{user}', [AdminUserController::class, 'update'])->name('update');
+        Route::delete('/{user}', [AdminUserController::class, 'destroy'])->name('destroy');
+    });
+
+
+
+
+//    ___________________________________________________________________________
+//    |                                                                         |
+//    |                                                                         |
+//    |                                                                         |
+//    |                                                                         |
+//    |                                                                         |
+//    |                                                                         |
+//    |                                                                         |
+//    |                             USER ROUTING                                |
+//    |                                                                         |
+//    |                                                                         |
+//    |                                                                         |
+//    |                                                                         |
+//    |                                                                         |
+//    |                                                                         |
+//    |                                                                         |
+//    ___________________________________________________________________________
 
     // [----- ROUTING USER -----]
     Route::prefix('user')->name('user.')->group(function () {

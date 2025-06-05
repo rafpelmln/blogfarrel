@@ -15,7 +15,7 @@ class KomentarController extends Controller
      */
     public function index()
     {
-        $komentars = Komentar::with(['user', 'artikel'])->latest()->get();
+        $komentars = Komentar::with(['user', 'artikel.kategori'])->latest()->paginate(10);
         return view('admin.komentar.index', compact('komentars'));
     }
 

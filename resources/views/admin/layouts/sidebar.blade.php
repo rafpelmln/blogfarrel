@@ -1,4 +1,4 @@
-<aside class="relative my-auto left-4 rounded-2xl w-16 bg-[#B9B28A] h-auto p-4 z-30 shadow-md">
+<aside class="relative my-auto left-4 rounded-2xl w-16  bg-[#B9B28A] h-auto p-4 z-30 shadow-md">
     <ul class="space-y-4 py-4">
         {{-- Dashboard --}}
         <li class="group relative flex items-center">
@@ -22,7 +22,7 @@
 
         {{-- Komentar --}}
         <li class="group relative flex items-center">
-            <a href="#" class="flex justify-center w-full px-4 py-2 rounded hover:bg-[#EBE5C2] text-[#504B38] shadow-md">
+            <a href="{{ Route('admin.komentar.index') }}" class="flex justify-center w-full px-4 py-2 rounded hover:bg-[#EBE5C2] text-[#504B38] shadow-md">
                 <i class="fas fa-comments"></i>
             </a>
             <span class="absolute left-16 ml-2 border font-medium bg-[#EBE5C2] text-[#504B38] text-sm px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none">
@@ -42,12 +42,26 @@
 
         {{-- User --}}
         <li class="group relative flex items-center">
-            <a href="#" class="flex justify-center w-full px-4 py-2 rounded hover:bg-[#EBE5C2] text-[#504B38] shadow-md">
+            <a href="{{ Route('admin.user.index') }}" class="flex justify-center w-full px-4 py-2 rounded hover:bg-[#EBE5C2] text-[#504B38] shadow-md">
                 <i class="fas fa-user"></i>
             </a>
             <span class="absolute left-16 ml-2 border font-medium bg-[#EBE5C2] text-[#504B38] text-sm px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none">
                 User
             </span>
         </li>
+
+        {{-- Log Out --}}
+        <li class="group relative flex items-center sm:hidden">
+            <form method="POST" action="{{ route('logout') }}" class="flex">
+                @csrf
+                <button type="submit" class="flex justify-center w-full px-2 py-2 rounded hover:bg-[#EBE5C2] text-[#504B38] shadow-md">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </form>
+            <span class="absolute left-16 ml-2 border font-medium bg-[#EBE5C2] text-[#504B38] text-sm px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none">
+                Logout
+            </span>
+        </li>
+
     </ul>
 </aside>

@@ -1,4 +1,4 @@
-<header class="h-auto w-4/5 bg-[#B9B28A] rounded-2xl flex items-center justify-between px-6 py-4 mx-auto mt-4 shadow-md">
+<header class="h-auto w-63 sm:w-4/5 bg-[#B9B28A] rounded-2xl flex items-center justify-center sm:justify-between px-6 py-4 mx-auto mt-4 shadow-md">
     <div>
         <h1 class="text-xl font-bold text-[#504B38]">@yield('page-title', 'Dashboard')</h1>
     </div>
@@ -31,7 +31,7 @@
 
         {{-- Kalau halaman artikel, tampilkan dropdown kategori --}}
         @if (Request::is('admin/artikel*') && isset($kategoriList))
-            <form method="GET" action="{{ route('admin.artikel.index') }}" class="">
+            <form method="GET" action="{{ route('admin.artikel.index') }}" class="sm:flex">
                 <select name="kategori" onchange="this.form.submit()"
                     class="text-sm bg-[#EBE5C2] text-[#504B38] rounded-lg px-3 py-1 shadow focus:border-[#504B38]">
                     <option value="">Semua Kategori</option>
@@ -44,7 +44,7 @@
             </form>
         @endif
 
-        <form method="POST" action="{{ route('logout') }}">
+        <form method="POST" action="{{ route('logout') }}" class="hidden sm:flex">
             @csrf
             <button type="submit" class="bg-[#504B38] text-[#F8F3D9] px-4 font-medium py-2 rounded">Logout</button>
         </form>
